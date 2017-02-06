@@ -5,23 +5,25 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
 /**
  * Created by Forgeahead-Shital on 1/23/2017.
  */
-public class EmployeeList {
-    public String authenticationToken=null;
 
 @Test
-public void login() throws Exception {
-/*    InputStream inputStream = new FileInputStream("url.properties");
-    Properties prop = new Properties();
-    prop.load(inputStream);
-    String baseURL = prop.getProperty("baseURL");
-    System.out.println(baseURL);*/
-    HttpResponse<JsonNode> login = Unirest.post("http://10.10.9.165:3000/users/sign_in.json")
+public class EmployeeList {
+    public String authenticationToken=null;
+    public void login() throws Exception {
+
+    FileReader fileReader = new FileReader();
+        String baseURL= fileReader.displayUrls("baseURL");
+        System.out.println(baseURL);
+
+
+   HttpResponse<JsonNode> login = Unirest.post(baseURL+"/users/sign_in.json")
             .header("Content-type", "application/json")
             .body("{\"user\" : {\"email\" : \"lareb.nawab@forgeahead.io\", \"password\" : \"password\"}}")
             .asJson();
